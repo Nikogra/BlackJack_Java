@@ -5,11 +5,15 @@ public enum FIGURE {
     DAMA,
     VALETE,
     AS,
-    NUM;
+    NUM2,
+    NUM3,
+    NUM4,
+    NUM5,
+    NUM6,
+    NUM7,
+    NUM8,
+    NUM9,
+    NUM10
 
-    public Carta createCard(int val, TYPE type) {
-        return switch (this) {
-            case REI, DAMA, VALETE, AS, NUM ->  new Carta(val, type, this);
-        };
-    }
+
 }
