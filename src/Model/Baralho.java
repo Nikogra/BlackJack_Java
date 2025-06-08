@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Baralho implements Constants {
-    private static ArrayList<Carta> cartas = new ArrayList<>();
+    private  ArrayList<Carta> cartas = new ArrayList<>();
     public Baralho() {
         for(int i = 0; i< TIPO_CARTA; i++) {
             for(int j = 0; j< N_NAIPE; j++) {
@@ -28,6 +28,8 @@ public class Baralho implements Constants {
         return null;
     }
 
+
+
     public int getNumCartas() {
         return cartas.size();
     }
@@ -40,7 +42,7 @@ public class Baralho implements Constants {
         cartas.add(carta);
     }
 
-    public static Carta getCarta(Carta c) {
+    public Carta getCarta(Carta c) {
         return cartas.contains(c) ? c : null;
     }
 
