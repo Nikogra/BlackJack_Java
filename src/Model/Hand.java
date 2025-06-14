@@ -9,8 +9,8 @@ public class Hand {
 
     public Hand(Baralho bar) {
         this.baralho=bar;
-        hand.add(baralho.getRandomCarta());
-        hand.add(baralho.getRandomCarta());
+        //hand.add(baralho.getRandomCarta());
+        //hand.add(baralho.getRandomCarta());
         calcularHandValue();
     }
 
