@@ -31,7 +31,7 @@ public class Hand {
 
     public boolean containsAs() {
         for(Carta c : hand) {
-            if(c.getId().charAt(1)=='a') {
+            if(c.getFigura() == FIGURE.AS) {
                 return true;
             }
         }
@@ -42,14 +42,18 @@ public class Hand {
         hand.add(baralho.getRandomCarta());
         if(getHandValue()>21 && containsAs() ){
             for(Carta c : hand) {
-                if(c.getId().charAt(1)=='a') {
+                if(c.getFigura()==FIGURE.AS) {
                     c.alteraValores();
                 }
             }
         }
+
         calcularHandValue();
     }
 
+    public void poeCarta(String s){
+        hand.add(baralho.getCarta(s));
+    }
 
     @Override
     public String toString() {

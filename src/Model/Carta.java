@@ -1,17 +1,42 @@
 package Model;
 
 public class  Carta {
-    private  int val,val_opt=1;
+    private  int val,val_opt=0;
     private  final  TYPE tipo;
     private  final FIGURE figura;
     private  String id;
-    private boolean trocou = false;
+
 
     public Carta(int val, TYPE tipo, FIGURE figura) {
         this.val = val;
         this.tipo = tipo;
         this.figura = figura;
 
+
+
+        if(figura.equals(FIGURE.VALETE)||figura.equals(FIGURE.DAMA)||figura.equals(FIGURE.REI)) {
+            setVal(10);
+        }
+        if(figura.equals(FIGURE.AS)) {
+            setVal(11);
+            setValopt(1);
+        }
+        createId();
+    }
+
+    public void setVal(int v) {
+        this.val = v;
+    }
+
+    public void setValopt(int v) {
+        this.val_opt = v;
+    }
+
+    public int getVal() {
+        return val;
+    }
+
+    public void createId(){
         String fig = switch (figura) {
             case REI -> "r";
             case DAMA -> "d";
@@ -27,32 +52,12 @@ public class  Carta {
             case OUROS -> "O";
         };
 
-        if (figura == FIGURE.AS && trocou==false) {
-            this.id = naipe + fig + this.val + "/" + this.val_opt;
-        } else {
+        if (this.getVal()!=11) {
             this.id = naipe + fig + this.val;
-        }
-
-        if(figura.equals(FIGURE.VALETE)||figura.equals(FIGURE.DAMA)||figura.equals(FIGURE.REI)) {
-            setVal(10);
-        }
-        if(figura.equals(FIGURE.AS)) {
-            setVal(11);
+        } else {
+            this.id = naipe + fig + this.val + "/" + this.val_opt;
         }
     }
-
-    public void setVal(int v) {
-        this.val = v;
-    }
-
-    public void setValopt(int v) {
-        this.val_opt = v;
-    }
-
-    public int getVal() {
-        return val;
-    }
-
 
     public TYPE getTipo() {
         return tipo;
@@ -67,10 +72,9 @@ public class  Carta {
     }
 
     public void alteraValores(){
-        if(this.getFigura().equals(FIGURE.AS)){
-            trocou=true;
-            val=val_opt;
-        }
+            setVal(val_opt);
+            setValopt(0);
+            createId();
     }
 
     @Override
