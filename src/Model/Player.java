@@ -4,14 +4,13 @@ public class Player {
     private int saldo;
     private int handValue;
     private int aposta;
-    private Hand hand;
     private Baralho baralho;
+    private Hand hand;
 
-    public Player(Hand h, Baralho b,int s) {
-        hand = h;
+    public Player( Baralho b,int s) {
         baralho=b;
         saldo = s;
-        handValue = hand.getHandValue();
+        hand = new Hand(baralho);
     }
 
     public int getSaldo() {
@@ -24,6 +23,10 @@ public class Player {
 
     public int getAposta() {
         return aposta;
+    }
+
+    public void setAposta(int a) {
+        aposta=a;
     }
 
     public Hand getHand() {
@@ -42,14 +45,6 @@ public class Player {
         saldo+=aposta*2;
     }
 
-    public void aposta(int bet){
-        aposta=bet;
-        if(retiraSaldo()){
-            hand.pedeCarta();
-            hand.pedeCarta();
-        }
-
-    }
 
     public void pedeCarta(){
         hand.pedeCarta();
