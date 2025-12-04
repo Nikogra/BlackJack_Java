@@ -9,8 +9,8 @@ public class Hand {
 
     public Hand(Baralho bar) {
         this.baralho=bar;
-        //hand.add(baralho.getRandomCarta());
-        //hand.add(baralho.getRandomCarta());
+        hand.add(baralho.getRandomCarta());
+        hand.add(baralho.getRandomCarta());
         calcularHandValue();
     }
 
@@ -18,15 +18,25 @@ public class Hand {
         return hand;
     }
 
+    public Carta getCarta(int index) {
+        return hand.get(index);
+    }
+
+    public int getCartaValue(int index){
+        return getCarta(index).getVal();
+        }
+
+
     public int getHandValue() {
         return handValue;
     }
 
-    private void calcularHandValue() {
+    private int calcularHandValue() {
         handValue = 0;
         for(Carta carta : hand) {
             handValue += carta.getVal();
         }
+        return handValue;
     }
 
     public boolean containsAs() {

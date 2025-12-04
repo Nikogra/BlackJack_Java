@@ -1,9 +1,8 @@
 package Model;
 
 public class Player {
-    private int saldo;
+    private int saldo=0;
     private int handValue;
-    private int aposta;
     private Baralho baralho;
     private Hand hand;
 
@@ -18,33 +17,28 @@ public class Player {
     }
 
     public int getHandValue() {
-        return handValue;
-    }
-
-    public int getAposta() {
-        return aposta;
-    }
-
-    public void setAposta(int a) {
-        aposta=a;
+        return handValue=hand.getHandValue();
     }
 
     public Hand getHand() {
         return hand;
     }
 
-    public boolean retiraSaldo(){
-        if(saldo>=aposta){
-            saldo-=aposta;
+    public boolean retiraSaldo(int val) {
+        if(val<saldo) {
+            saldo-=val;
             return true;
         }
         return false;
     }
 
-    public void ganharAposta(){
-        saldo+=aposta*2;
+    public void poeSaldo(int val){
+        saldo+=val*2;
     }
 
+    public void insereSaldo(int val){
+        saldo+=val;
+    }
 
     public void pedeCarta(){
         hand.pedeCarta();
@@ -53,8 +47,8 @@ public class Player {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(hand);
-        builder.append(" "+this.getSaldo());
+        builder.append("Player:"+hand);
+        builder.append("\n "+"Saldo:"+this.getSaldo());
         return builder.toString();
     }
 }
