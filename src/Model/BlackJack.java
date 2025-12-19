@@ -48,6 +48,10 @@ public class BlackJack {
         System.out.println("Put your Money:");
         Scanner sc=new Scanner(System.in);
         int s=sc.nextInt();
+        while(s<=0){
+            System.out.println("Put a Valid amount of money!");
+            s=sc.nextInt();
+        }
         //criação jogadores
         playersCreation(s);
         //Sistema de aposta
@@ -74,6 +78,10 @@ public class BlackJack {
         do{
             System.out.println("Play? (Y/N)");
             String res=sc.next().toLowerCase();
+            while(!(res.equals("y") || res.equals("n"))){
+                System.out.println("Play? (Y/N)");
+                res=sc.next().toLowerCase();
+            }
             if(res.equals("y")){
                 playersCreation(getPlayerSaldo());
                 showHands();
@@ -122,7 +130,8 @@ public class BlackJack {
 
                 }
             }else{
-                break;
+                    System.out.println("Bye!");
+                    break;
             }
         }while(getPlayerSaldo()>0);
 

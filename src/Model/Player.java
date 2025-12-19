@@ -25,7 +25,7 @@ public class Player {
     }
 
     public boolean retiraSaldo(int val) {
-        if(val<saldo) {
+        if(val<=saldo) {
             saldo-=val;
             return true;
         }
