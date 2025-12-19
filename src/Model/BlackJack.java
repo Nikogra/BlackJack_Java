@@ -28,8 +28,9 @@ public class BlackJack {
         return player.retiraSaldo(val);
     }
 
-    private void playerGanha(int val){player.poeSaldo(val);}
+    private boolean playerGanha(int val){return player.poeSaldo(val);}
 
+    private boolean playerEmpata(int val){return player.insereSaldo(val);}
 
     //dealer functions
     private int getDealerHandValue(){ return dealer.getHandValue();}
@@ -44,20 +45,23 @@ public class BlackJack {
         player=new Player(baralho,val);
         dealer=new Dealer(baralho);
     }
-    private boolean Initial_Interface(){
+
+    private void Initial_Interface(Scanner sc) {
         System.out.println("Put your Money:");
-        Scanner sc=new Scanner(System.in);
-        int s=sc.nextInt();
-        while(s<=0){
+        int s = sc.nextInt();
+        while (s <= 0) {
             System.out.println("Put a Valid amount of money!");
-            s=sc.nextInt();
+            s = sc.nextInt();
         }
         //criação jogadores
         playersCreation(s);
-        //Sistema de aposta
+    }
+
+    private boolean Bet_Interface(Scanner sc){
+    //Sistema de aposta
         System.out.println("Saldo:"+getPlayerSaldo());
         System.out.println("Put your Bet:");
-        bet = sc.nextInt();
+        this.bet = sc.nextInt();
         //playerAposta(bet);
         while(!playerAposta(bet)){
             System.out.println("You dont have this money bet again:");
@@ -71,11 +75,16 @@ public class BlackJack {
         System.out.println(dealer);
     }
 
-    public BlackJack(){
-        Scanner sc=new Scanner(System.in);
+    public BlackJack(Scanner sc) {
+
         System.out.println("Welcome to Black Jack!");
-        Initial_Interface();
+        Initial_Interface(sc);
         do{
+            if(getPlayerSaldo()<=0){
+                System.out.println("You dont have money!");
+                break;
+            }
+            Bet_Interface(sc);
             System.out.println("Play? (Y/N)");
             String res=sc.next().toLowerCase();
             while(!(res.equals("y") || res.equals("n"))){
@@ -110,19 +119,22 @@ public class BlackJack {
                                 showHands();
                             }
                             if(getDealerHandValue()<=21){
-                                if(getDealerHandValue()<getPlayerHandValue()||getPlayerHandValue()==21){
-                                    System.out.println("You Win :)!");
-                                    playerGanha(bet);
+                                if(getDealerHandValue()<getPlayerHandValue()){
+                                    if(playerGanha(bet)){
+                                        System.out.println("You Win :)!");
+                                    }
                                 }
-                                if(getDealerHandValue()>getPlayerHandValue()){
+                                else if(getDealerHandValue()>getPlayerHandValue()){
                                     System.out.println("You Lost :(");
                                 }
                                 else{
+                                    if(playerEmpata(bet)){
                                     System.out.println("You Tie :|");
+                                    }
                                 }
                             }else{
-                                System.out.println("You Win :)!");
                                 playerGanha(bet);
+                                System.out.println("You Win :)!");
                             }
                         }
                         break;

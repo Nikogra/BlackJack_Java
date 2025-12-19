@@ -32,12 +32,14 @@ public class Player {
         return false;
     }
 
-    public void poeSaldo(int val){
-        saldo+=val*2;
+    public boolean poeSaldo(int val){
+        this.saldo+=val*2;
+        return true;
     }
 
-    public void insereSaldo(int val){
-        saldo+=val;
+    public boolean insereSaldo(int val){
+        this.saldo+=val;
+        return true;
     }
 
     public void pedeCarta(){
