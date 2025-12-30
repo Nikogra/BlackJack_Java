@@ -28,6 +28,8 @@ public class Dealer {
     public void dealerMostraCard(){
         firstcard=false;
     }
+
+    public void resetaHand(){hand.resetaHand();}
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();

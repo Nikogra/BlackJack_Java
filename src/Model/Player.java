@@ -46,6 +46,8 @@ public class Player {
         hand.pedeCarta();
     }
 
+    public void resetaHand(){hand.resetaHand();}
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();

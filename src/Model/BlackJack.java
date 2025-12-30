@@ -32,6 +32,7 @@ public class BlackJack {
 
     private boolean playerEmpata(int val){return player.insereSaldo(val);}
 
+    private void playerResetaHand(){player.resetaHand();}
     //dealer functions
     private int getDealerHandValue(){ return dealer.getHandValue();}
 
@@ -40,6 +41,8 @@ public class BlackJack {
     private void dealerPedeCarta(){ dealer.pedeCarta();}
 
     private void dealerShowCard(){ dealer.dealerMostraCard();}
+
+    private void dealerResetaHand(){dealer.resetaHand();}
     //game
     private void playersCreation(int val){
         player=new Player(baralho,val);
@@ -70,21 +73,39 @@ public class BlackJack {
         return true;
     }
 
+    private boolean VerificaSaldo(){
+        if(getPlayerSaldo()<=0){
+            System.out.println("You dont have money!");
+            return false;
+        }
+        return true;
+    }
+
+    private void delay(int millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
     private void showHands(){
         System.out.println(player);
         System.out.println(dealer);
+        delay(2000);
     }
 
+    private void resetaHand(){
+        dealer.resetaHand();
+        player.resetaHand();
+    }
     public BlackJack(Scanner sc) {
-
         System.out.println("Welcome to Black Jack!");
         Initial_Interface(sc);
         do{
-            if(getPlayerSaldo()<=0){
-                System.out.println("You dont have money!");
-                break;
-            }
+            if(!VerificaSaldo()){break;}
             Bet_Interface(sc);
+
             System.out.println("Play? (Y/N)");
             String res=sc.next().toLowerCase();
             while(!(res.equals("y") || res.equals("n"))){
@@ -92,7 +113,7 @@ public class BlackJack {
                 res=sc.next().toLowerCase();
             }
             if(res.equals("y")){
-                playersCreation(getPlayerSaldo());
+                resetaHand();
                 showHands();
                 while(true){
                     String choice;
@@ -146,8 +167,6 @@ public class BlackJack {
                     break;
             }
         }while(getPlayerSaldo()>0);
-
-
 
         }
     }

@@ -65,6 +65,17 @@ public class Hand {
         hand.add(baralho.getCarta(s));
     }
 
+    public void resetaHand(){
+        for(Carta c : hand) {
+            baralho.addCarta(c);
+        }
+        hand.clear();
+        hand.add(baralho.getRandomCarta());
+        hand.add(baralho.getRandomCarta());
+        calcularHandValue();
+    }
+
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
